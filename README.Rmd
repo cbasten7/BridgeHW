@@ -1,0 +1,42 @@
+---
+title: "README"
+author: "Chris Basten"
+date: "2/3/2021"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+```{r}
+WI19 = read.csv("WI19.csv")
+WI92 = read.csv("WI92.csv")
+
+
+WI.19 = data.frame(WI19$STRUCTURE_NUMBER_008, WI19$YEAR_BUILT_027, WI19$DECK_COND_058,
+        WI19$SUPERSTRUCTURE_COND_059, WI19$SUBSTRUCTURE_COND_060, WI19$CHANNEL_COND_061,
+        WI19$CULVERT_COND_062, WI19$TOLL_020, WI19$ADT_029, WI19$ROADWAY_WIDTH_MT_051)
+
+WI.92 = data.frame(WI92$STRUCTURE_NUMBER_008, WI92$YEAR_BUILT_027, WI92$DECK_COND_058,
+        WI92$SUPERSTRUCTURE_COND_059, WI92$SUBSTRUCTURE_COND_060, WI92$CHANNEL_COND_061,
+        WI92$CULVERT_COND_062, WI92$TOLL_020, WI92$ADT_029, WI92$ROADWAY_WIDTH_MT_051)
+
+par(mfrow=c(1,2))
+hist(WI19$YEAR_BUILT_027, main = "Year Built for 2019 Bridges")
+hist(WI92$YEAR_BUILT_027, main = "Year Built for 1992 Bridges")
+
+## The histograms show the how many bridges have been built since 1992 as well as if bridges no longer exist.
+
+mean(WI92$ADT_029)
+mean(WI19$ADT_029)
+
+## The means show that the traffic has increased from 1992-2019 on Wisconsin bridges.
+
+mean(WI19$ROADWAY_WIDTH_MT_051)
+mean(WI92$ROADWAY_WIDTH_MT_051[1:13082])
+
+## The means show that the Roadway widths have increased since 1992, which makes sense considering the traffic has increased
+
+```
